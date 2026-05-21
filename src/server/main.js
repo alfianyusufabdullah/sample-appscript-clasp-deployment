@@ -1,18 +1,20 @@
-function onOpen() {
+import { getAllGreetings, addGreeting } from './services/GreetingService.js';
+
+export function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('My App')
     .addItem('Show Greetings', 'showSidebar')
     .addToUi();
 }
 
-function showSidebar() {
+export function showSidebar() {
   const html = HtmlService.createHtmlOutputFromFile('index')
     .setTitle('Greetings')
     .setWidth(300);
   SpreadsheetApp.getUi().showSidebar(html);
 }
 
-function doGet(e) {
+export function doGet(e) {
   const action = e?.parameter?.action;
 
   let result;
@@ -33,7 +35,7 @@ function doGet(e) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-function addGreetingViaSheet(name) {
+export function addGreetingViaSheet(name) {
   addGreeting(name);
   return 'Greeting added!';
 }

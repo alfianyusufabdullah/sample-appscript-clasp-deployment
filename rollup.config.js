@@ -1,8 +1,15 @@
 import commonjs from '@rollup/plugin-commonjs';
-import nodeResolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import copy from 'rollup-plugin-copy';
-import gas from 'rollup-plugin-gas';
+
+function stripExports() {
+  return {
+    name: 'strip-exports',
+    renderChunk(code) {
+      return code.replace(/^export .+$/gm, '');
+    },
+  };
+}
 
 export default {
   input: 'src/server/main.js',
@@ -11,7 +18,6 @@ export default {
     format: 'esm',
   },
   plugins: [
-    nodeResolve(),
     commonjs(),
     replace({
       preventAssignment: true,
@@ -19,7 +25,7 @@ export default {
         __SPREADSHEET_ID__: JSON.stringify(process.env.SPREADSHEET_ID || 'YOUR_SPREADSHEET_ID'),
       },
     }),
-    gas(),
+    stripExports(),
     copy({
       targets: [{ src: 'appsscript.json', dest: 'dist' }],
     }),

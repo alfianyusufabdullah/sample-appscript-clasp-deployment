@@ -1,9 +1,12 @@
-function addGreeting(name) {
+import { CONFIG } from '../config.js';
+import { findAll, appendRow } from '../repositories/SheetRepository.js';
+
+export function addGreeting(name) {
   const timestamp = new Date();
   appendRow(CONFIG.SHEET_NAMES.GREETINGS, [name, timestamp.toISOString()]);
 }
 
-function getAllGreetings() {
+export function getAllGreetings() {
   const rows = findAll(CONFIG.SHEET_NAMES.GREETINGS);
   if (rows.length === 0) return [];
   return rows.slice(1).map((row, i) => ({
