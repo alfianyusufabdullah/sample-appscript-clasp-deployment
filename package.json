@@ -1,0 +1,23 @@
+{
+  "name": "sample-clasp-deploymeny",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "deploy": "npm run build && clasp push",
+    "watch": "rollup -c -w",
+    "open": "clasp open",
+    "login": "clasp login",
+    "logout": "clasp logout"
+  },
+  "devDependencies": {
+    "@google/clasp": "^2.4.2",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "rollup": "^4.9.0",
+    "rollup-plugin-copy": "^3.5.0",
+    "@rollup/plugin-replace": "^5.0.5",
+    "rollup-plugin-gas": "^1.1.0"
+  }
+}

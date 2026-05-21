@@ -1,0 +1,12 @@
+node_modules/**
+src/**
+tests/**
+*.test.js
+rollup.config.js
+package.json
+package-lock.json
+.eslintrc*
+.prettierrc*
+.github/**
+.gitignore
+README.md
