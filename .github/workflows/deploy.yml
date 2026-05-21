@@ -35,5 +35,14 @@ jobs:
           echo "$CLASP_JSON" > .clasp.json
           echo "$CLASPRC_JSON" > ~/.clasprc.json
 
+      - name: Debug Clasp Config
+        run: |
+          echo "=== .clasp.json keys ==="
+          node -e "const o = JSON.parse(require('fs').readFileSync('.clasp.json','utf8')); console.log(Object.keys(o))"
+          echo "=== ~/.clasprc.json keys ==="
+          node -e "const o = JSON.parse(require('fs').readFileSync(require('os').homedir()+'/.clasprc.json','utf8')); console.log(Object.keys(o))"
+          echo "=== Clasp Paths ==="
+          npx @google/clasp paths
+
       - name: Deploy with Clasp
         run: npx @google/clasp push
