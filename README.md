@@ -55,18 +55,21 @@ SPREADSHEET_ID=$(grep SPREADSHEET_ID .env.local | cut -d= -f2) npm run deploy
 
 Repository → Settings → Secrets and variables → Actions → New repository secret:
 
-| Secret | Isi | Cara Generate |
-|--------|-----|---------------|
-| `CLASP_JSON` | Isi file `.clasp.json` (raw JSON) | `cat .clasp.json` lalu copy |
-| `CLASPRC_JSON` | Isi file `~/.clasprc.json` (raw JSON) | `cat ~/.clasprc.json` lalu copy |
-| `SPREADSHEET_ID` | ID Google Spreadsheet | dari URL spreadsheet |
+| Secret | Sumber |
+|--------|--------|
+| `ACCESS_TOKEN` | `.clasprc.json` → `token.access_token` |
+| `ID_TOKEN` | `.clasprc.json` → `token.id_token` |
+| `REFRESH_TOKEN` | `.clasprc.json` → `token.refresh_token` |
+| `CLIENT_ID` | `.clasprc.json` → `oauth2ClientSettings.clientId` |
+| `CLIENT_SECRET` | `.clasprc.json` → `oauth2ClientSettings.clientSecret` |
+| `SCRIPT_ID` | `.clasp.json` → `scriptId` |
+| `SPREADSHEET_ID` | URL Spreadsheet |
 
-### Mendapatkan CLASPRC_JSON
+### Mendapatkan Token dari .clasprc.json
 
 ```bash
-npm run login                           # Login clasp
-cat .clasp.json                         # copy → CLASP_JSON
-cat ~/.clasprc.json                     # copy → CLASPRC_JSON
+npm run login
+cat ~/.clasprc.json    # lihat field-nya, copy satu per satu ke secrets
 ```
 
 ### Trigger Deploy

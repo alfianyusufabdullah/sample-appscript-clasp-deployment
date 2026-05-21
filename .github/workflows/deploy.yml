@@ -27,22 +27,14 @@ jobs:
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
         run: npm run build
 
-      - name: Authenticate Clasp
-        env:
-          CLASP_JSON: ${{ secrets.CLASP_JSON }}
-          CLASPRC_JSON: ${{ secrets.CLASPRC_JSON }}
-        run: |
-          echo "$CLASP_JSON" > .clasp.json
-          echo "$CLASPRC_JSON" > ~/.clasprc.json
-
-      - name: Debug Clasp Config
-        run: |
-          echo "=== .clasp.json keys ==="
-          node -e "const o = JSON.parse(require('fs').readFileSync('.clasp.json','utf8')); console.log(Object.keys(o))"
-          echo "=== ~/.clasprc.json keys ==="
-          node -e "const o = JSON.parse(require('fs').readFileSync(require('os').homedir()+'/.clasprc.json','utf8')); console.log(Object.keys(o))"
-          echo "=== Clasp Paths ==="
-          npx @google/clasp paths
-
-      - name: Deploy with Clasp
-        run: npx @google/clasp push
+      - name: Push with Clasp
+        uses: daikikatsuragawa/clasp-action@v1.2.0
+        with:
+          accessToken: ${{ secrets.ACCESS_TOKEN }}
+          idToken: ${{ secrets.ID_TOKEN }}
+          refreshToken: ${{ secrets.REFRESH_TOKEN }}
+          clientId: ${{ secrets.CLIENT_ID }}
+          clientSecret: ${{ secrets.CLIENT_SECRET }}
+          scriptId: ${{ secrets.SCRIPT_ID }}
+          rootDir: dist
+          command: push
