@@ -32,8 +32,8 @@ jobs:
           CLASP_JSON: ${{ secrets.CLASP_JSON }}
           CLASPRC_JSON: ${{ secrets.CLASPRC_JSON }}
         run: |
-          printf '%s\n' "$CLASP_JSON" > .clasp.json
-          printf '%s\n' "$CLASPRC_JSON" > ~/.clasprc.json
+          echo "$CLASP_JSON" > .clasp.json
+          echo "$CLASPRC_JSON" > ~/.clasprc.json
 
       - name: Deploy with Clasp
         run: npx @google/clasp push
