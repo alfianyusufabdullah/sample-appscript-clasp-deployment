@@ -27,9 +27,11 @@ jobs:
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
         run: npm run build
 
+      - name: Authenticate Clasp
+        run: |
+          echo '${{ secrets.CLASP_JSON }}' > .clasp.json
+          mkdir -p ~/.clasp
+          echo '${{ secrets.CLASPRC_JSON }}' > ~/.clasprc.json
+
       - name: Deploy with Clasp
-        uses: anthonykrivonos/clasp-action@v1.0
-        with:
-          clasp_json: ${{ secrets.CLASP_JSON }}
-          clasprc_json: ${{ secrets.CLASPRC_JSON }}
-          deployment_command: push
+        run: npx @google/clasp push
