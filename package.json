@@ -18,6 +18,6 @@
     "rollup": "^4.9.0",
     "rollup-plugin-copy": "^3.5.0",
     "@rollup/plugin-replace": "^5.0.5",
-    "rollup-plugin-gas": "^1.1.0"
+    "rollup-plugin-gas": "^1.0.0"
   }
 }
