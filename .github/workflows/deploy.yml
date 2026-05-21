@@ -28,10 +28,12 @@ jobs:
         run: npm run build
 
       - name: Authenticate Clasp
+        env:
+          CLASP_JSON: ${{ secrets.CLASP_JSON }}
+          CLASPRC_JSON: ${{ secrets.CLASPRC_JSON }}
         run: |
-          echo '${{ secrets.CLASP_JSON }}' > .clasp.json
-          mkdir -p ~/.clasp
-          echo '${{ secrets.CLASPRC_JSON }}' > ~/.clasprc.json
+          printf '%s\n' "$CLASP_JSON" > .clasp.json
+          printf '%s\n' "$CLASPRC_JSON" > ~/.clasprc.json
 
       - name: Deploy with Clasp
         run: npx @google/clasp push

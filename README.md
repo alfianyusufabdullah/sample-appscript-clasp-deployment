@@ -55,18 +55,18 @@ SPREADSHEET_ID=$(grep SPREADSHEET_ID .env.local | cut -d= -f2) npm run deploy
 
 Repository → Settings → Secrets and variables → Actions → New repository secret:
 
-| Secret | Isi |
-|--------|-----|
-| `CLASP_JSON` | Isi file `.clasp.json` (raw JSON) |
-| `CLASPRC_JSON` | Isi file `~/.clasprc.json` setelah `clasp login` |
-| `SPREADSHEET_ID` | ID Google Spreadsheet (dari URL spreadsheet) |
+| Secret | Isi | Cara Generate |
+|--------|-----|---------------|
+| `CLASP_JSON` | Isi file `.clasp.json` (raw JSON) | `cat .clasp.json` lalu copy |
+| `CLASPRC_JSON` | Isi file `~/.clasprc.json` (raw JSON) | `cat ~/.clasprc.json` lalu copy |
+| `SPREADSHEET_ID` | ID Google Spreadsheet | dari URL spreadsheet |
 
 ### Mendapatkan CLASPRC_JSON
 
-Setelah `npm run login`, file `~/.clasprc.json` akan ter-generate. Copy isinya:
-
 ```bash
-cat ~/.clasprc.json
+npm run login                           # Login clasp
+cat .clasp.json                         # copy → CLASP_JSON
+cat ~/.clasprc.json                     # copy → CLASPRC_JSON
 ```
 
 ### Trigger Deploy
